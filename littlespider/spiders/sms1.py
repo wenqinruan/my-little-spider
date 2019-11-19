@@ -26,7 +26,7 @@ class Sms1Spider(scrapy.Spider):
             item['sendMobile'] = tr.css('td::text')[1].get()
             item['content'] = tr.css('td::text')[2].get()
             item['sendTime'] = tr.css('td time::text').get()
-            item['md5'] = my_md5(item['mobileId'] % item['content'] % item['sendTime'])
+            item['md5'] = my_md5(item['mobileId'] + item['content'] + item['sendTime'])
             items.append(item)
 
         return items
