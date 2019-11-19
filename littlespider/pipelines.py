@@ -23,8 +23,8 @@ class MySqlPipeline(object):
     def process_item(self, item, spider):
         cur = self.mysql_conn.cursor()
         try:
-            sql_str = 'INSERT INTO t_mobile_send_log (md5, mobileId, sendMobile, sendTime, content)  VALUES (?, ?, ?, ?, ?)'
-            cur.execute(sql_str, (item['md5'], item['mobileId'], item['sendMobile'], item['sendTime'], item['content'],))
+            sql_str = 'INSERT INTO t_mobile_send_log (md5, mobileId, sendMobile, sendTime, content)  VALUES (%s, %s, %s, %s, %s)'
+            cur.execute(sql_str, (item['md5'], item['mobileId'], item['sendMobile'], item['sendTime'], item['content']))
             self.mysql_conn.commit()
         except:
             self.mysql_conn.rollback()
